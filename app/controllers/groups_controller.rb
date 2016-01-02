@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
 
+
 def index
 	@groups = Group.all
 end
@@ -10,6 +11,7 @@ end
 
 def create
 	@group = Group.create(group_params)
+	
 
 	if @group.save
 		redirect_to groups_path
@@ -45,6 +47,7 @@ def destroy
 end
 
 private
+
 
 def group_params
 	params.require(:group).permit(:title, :description)
