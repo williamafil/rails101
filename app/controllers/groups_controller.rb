@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
 
 def index
 	@groups = Group.all
@@ -10,6 +11,7 @@ end
 
 def create
 	@group = Group.create(group_params)
+	
 
 	if @group.save
 		redirect_to groups_path
@@ -20,6 +22,7 @@ end
 
 def show
 	@group = Group.find(params[:id])
+	@posts = @group.posts
 end
 
 def edit
@@ -44,6 +47,7 @@ def destroy
 end
 
 private
+
 
 def group_params
 	params.require(:group).permit(:title, :description)
